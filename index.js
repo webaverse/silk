@@ -1,4 +1,4 @@
-import * as THREE from 'https://lib.webaverse.com/three.js';
+import * as THREE from 'three';
 import Simplex from './simplex-noise.js';
 import metaversefile from 'metaversefile';
 const {useFrame} = metaversefile;
