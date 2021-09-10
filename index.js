@@ -1,13 +1,12 @@
 import * as THREE from 'three';
 import Simplex from './simplex-noise.js';
+import metaversefile from 'metaversefile';
+const {useFrame} = metaversefile;
 
 const localVector = new THREE.Vector3();
 const simplex = new Simplex('lol');
 
-const _makeSilkMesh = () => {
-  // const velocity = v.clone();
-  // let grounded = false;
-  
+export default () => {
   const silkMesh = new THREE.Mesh(new THREE.BoxBufferGeometry(0.1, 0.05, 0.1, 10, 10, 10), new THREE.MeshNormalMaterial());
   const defaultScale = new THREE.Vector3(1, 0.3, 1).multiplyScalar(0.5);
   silkMesh.scale.copy(defaultScale);
@@ -16,7 +15,7 @@ const _makeSilkMesh = () => {
   let lastTimestamp = startTime;
   let animation = null;
   const timeOffset = Math.random() * 10;
-  silkMesh.update = () => {
+  useFrame(() => {
     const now = Date.now();
     const timeDiff = (now - lastTimestamp) / 1000;
     lastTimestamp = now;
@@ -33,17 +32,6 @@ const _makeSilkMesh = () => {
     silkMesh.geometry.computeVertexNormals();
     silkMesh.geometry.normalsNeedUpdate = true;
     silkMesh.geometry.verticesNeedUpdate = true;
-  };
-  return silkMesh;
-};
-// const silkMesh = _makeSilkMesh();
-// silkMesh.position.set(0, 1.2, -2);
-// scene.add(silkMesh);
-
-export default async app => {
-  const silkMesh = _makeSilkMesh();
-  /* app.addEventListener('frame', () => {
-    silkMesh.update();
-  }); */
+  });
   return silkMesh;
 };
