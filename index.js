@@ -11,14 +11,14 @@ export default () => {
   const defaultScale = new THREE.Vector3(1, 0.3, 1).multiplyScalar(0.5);
   silkMesh.scale.copy(defaultScale);
 
-  const startTime = Date.now();
-  let lastTimestamp = startTime;
-  let animation = null;
+  // const startTime = Date.now();
+  // let lastTimestamp = startTime;
+  // let animation = null;
   const timeOffset = Math.random() * 10;
   useFrame(() => {
-    const now = Date.now();
+    /* const now = Date.now();
     const timeDiff = (now - lastTimestamp) / 1000;
-    lastTimestamp = now;
+    lastTimestamp = now; */
 
     const time = timeOffset + performance.now() * 0.002;
     const k = 1;
