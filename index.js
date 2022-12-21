@@ -5,10 +5,12 @@ const {useFrame} = metaversefile;
 
 const localVector = new THREE.Vector3();
 const simplex = new Simplex('lol');
+const material = new THREE.MeshNormalMaterial();
+const defaultScale = new THREE.Vector3(1, 0.3, 1).multiplyScalar(0.5);
 
 export default () => {
-  const silkMesh = new THREE.Mesh(new THREE.BoxBufferGeometry(0.1, 0.05, 0.1, 10, 10, 10), new THREE.MeshNormalMaterial());
-  const defaultScale = new THREE.Vector3(1, 0.3, 1).multiplyScalar(0.5);
+  const geometry = new THREE.BoxBufferGeometry(0.1, 0.05, 0.1, 10, 10, 10);
+  const silkMesh = new THREE.Mesh(geometry, material);
   silkMesh.scale.copy(defaultScale);
 
   // const startTime = Date.now();
