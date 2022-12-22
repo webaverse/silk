@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import Simplex from './simplex-noise.js';
 import metaversefile from 'metaversefile';
-const {useApp, useFrame, usePhysics} = metaversefile;
+const {useApp, useFrame, useCleanup, usePhysics} = metaversefile;
 
 const localVector = new THREE.Vector3();
 const simplex = new Simplex('lol');
@@ -43,6 +43,10 @@ export default () => {
   app.add(silkMesh);
   const physicsId = physics.addGeometry(silkMesh);
   app.addPhysicsObject(physicsId);
+
+  useCleanup(() => {
+    physics.removeGeometry(physicsId);
+  });
 
   return app;
 };
