@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import Simplex from './simplex-noise.js';
 import metaversefile from 'metaversefile';
-const {useFrame} = metaversefile;
+const {useApp, useFrame, usePhysics} = metaversefile;
 
 const localVector = new THREE.Vector3();
 const simplex = new Simplex('lol');
@@ -9,6 +9,13 @@ const material = new THREE.MeshNormalMaterial();
 const defaultScale = new THREE.Vector3(1, 0.3, 1).multiplyScalar(0.5);
 
 export default () => {
+  const app = useApp();
+  app.name = 'silk';
+
+  const physics = usePhysics();
+
+  console.trace('silk');
+
   const geometry = new THREE.BoxBufferGeometry(0.1, 0.05, 0.1, 10, 10, 10);
   const silkMesh = new THREE.Mesh(geometry, material);
   silkMesh.scale.copy(defaultScale);
@@ -35,5 +42,9 @@ export default () => {
     silkMesh.geometry.normalsNeedUpdate = true;
     silkMesh.geometry.verticesNeedUpdate = true;
   });
-  return silkMesh;
+  app.add(silkMesh);
+  const physicsId = physics.addGeometry(silkMesh);
+  app.addPhysicsObject(physicsId);
+
+  return app;
 };
