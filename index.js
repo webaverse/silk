@@ -14,8 +14,6 @@ export default () => {
 
   const physics = usePhysics();
 
-  console.trace('silk');
-
   const geometry = new THREE.BoxBufferGeometry(0.1, 0.05, 0.1, 10, 10, 10);
   const silkMesh = new THREE.Mesh(geometry, material);
   silkMesh.scale.copy(defaultScale);
