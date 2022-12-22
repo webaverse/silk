@@ -22,7 +22,7 @@ export default () => {
   // let lastTimestamp = startTime;
   // let animation = null;
   const timeOffset = Math.random() * 10;
-  useFrame(() => {
+  const shapeObject = () => {
     /* const now = Date.now();
     const timeDiff = (now - lastTimestamp) / 1000;
     lastTimestamp = now; */
@@ -39,7 +39,11 @@ export default () => {
     silkMesh.geometry.computeVertexNormals();
     silkMesh.geometry.normalsNeedUpdate = true;
     silkMesh.geometry.verticesNeedUpdate = true;
+  };
+  useFrame(() => {
+    shapeObject();
   });
+  shapeObject();
   app.add(silkMesh);
   const physicsId = physics.addGeometry(silkMesh);
   app.addPhysicsObject(physicsId);
